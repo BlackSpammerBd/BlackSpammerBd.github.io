@@ -1,65 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>🔗 Real URL Shortener</title>
+  <title>🔗 শক্তিশালী URL Shortener</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background-color: #111;
-      color: #0ff;
-      font-family: monospace;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      font-family: 'Courier New', monospace;
+      color: #00ff99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 30px 10px;
+    }
+    h1 {
+      color: #00ffcc;
+      margin-bottom: 20px;
     }
     input, button {
-      width: 100%;
-      padding: 10px;
+      width: 90%;
+      max-width: 500px;
+      padding: 12px;
       margin: 10px 0;
-      background: #000;
-      color: #0ff;
-      border: 1px solid #0ff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input {
+      background: #1f1f1f;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
     }
     button {
-      background: #0ff;
+      background: #00ffcc;
       color: #000;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #00ffaa;
     }
     .result {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 8px;
       margin-top: 20px;
-      background: #000;
-      padding: 10px;
-      border: 1px solid #0ff;
-      border-radius: 5px;
+      width: 90%;
+      max-width: 500px;
       word-break: break-all;
+    }
+    a {
+      color: #00ffff;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h2>🔗 Real URL Shortener</h2>
-  <input type="text" id="longUrl" placeholder="👉 বড় URL লিখুন (যেমনঃ https://example.com)" />
+
+  <h1>🔗 Real URL Shortener</h1>
+  <input type="text" id="longUrl" placeholder="🔍 এখানে বড় URL লিখুন (যেমনঃ https://example.com)">
   <button onclick="shorten()">⏬ শর্ট লিংক তৈরি করুন</button>
-  <div class="result" id="output">⏳ অপেক্ষা করুন...</div>
+
+  <div id="output" class="result" style="display:none;"></div>
 
   <script>
     async function shorten() {
-      const longUrl = document.getElementById("longUrl").value;
+      const longUrl = document.getElementById("longUrl").value.trim();
       const output = document.getElementById("output");
 
       if (!longUrl.startsWith("http")) {
-        output.innerHTML = "⚠️ দয়া করে সঠিক URL দিন (https://...)";
+        output.style.display = "block";
+        output.innerHTML = "⚠️ সঠিক URL দিন (https://...) দিয়ে শুরু হতে হবে!";
         return;
       }
 
-      output.innerHTML = "⏳ লিংক শর্ট করা হচ্ছে...";
+      output.style.display = "block";
+      output.innerHTML = "⏳ শর্ট লিংক তৈরি হচ্ছে...";
 
       try {
-        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
+        const proxy = "https://corsproxy.io/?";
+        const api = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
+        const response = await fetch(proxy + api);
         const shortUrl = await response.text();
-        output.innerHTML = `✅ শর্ট লিংক: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+
+        output.innerHTML = `✅ আপনার শর্ট লিংক:<br><a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
       } catch (err) {
-        output.innerHTML = "❌ শর্ট লিংক তৈরি করা যায়নি। আবার চেষ্টা করুন।";
+        output.innerHTML = "❌ শর্ট লিংক তৈরি করা যায়নি! আবার চেষ্টা করুন।";
       }
     }
   </script>
+
 </body>
 </html>
