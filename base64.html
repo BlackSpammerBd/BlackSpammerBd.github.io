@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Base64 Encoder/Decoder</title>
   <meta charset="UTF-8">
+  <title>Base64 Tool</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #111; color: #fff; }
-    textarea { width: 100%; height: 100px; margin-bottom: 10px; background: #222; color: #0f0; }
-    button { padding: 10px; margin: 5px; background: #0f0; border: none; cursor: pointer; }
+    body { background: #111; color: #0f0; font-family: monospace; padding: 20px; }
+    textarea { width: 100%; height: 100px; background: #000; color: #0f0; margin-bottom: 10px; }
+    button { padding: 10px; background: #0f0; color: #000; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
-  <h2>🔐 Base64 Encoder / Decoder</h2>
+  <h2>🧬 Base64 Encoder / Decoder</h2>
   <textarea id="input" placeholder="এখানে লিখুন..."></textarea><br>
   <button onclick="encode()">🔼 Encode</button>
   <button onclick="decode()">🔽 Decode</button>
-  <h3>📄 ফলাফল:</h3>
+  <h3>ফলাফল:</h3>
   <textarea id="output" readonly></textarea>
 
   <script>
     function encode() {
-      let text = document.getElementById('input').value;
-      document.getElementById('output').value = btoa(text);
+      document.getElementById('output').value = btoa(document.getElementById('input').value);
     }
     function decode() {
-      let text = document.getElementById('input').value;
       try {
-        document.getElementById('output').value = atob(text);
+        document.getElementById('output').value = atob(document.getElementById('input').value);
       } catch {
-        document.getElementById('output').value = '⛔ ভুল Base64 ফরম্যাট!';
+        document.getElementById('output').value = '⛔ ভুল ইনপুট!';
       }
     }
   </script>
