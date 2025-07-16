@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>URL Shortener</title>
+  <style>
+    body { background: #111; color: #ff0; font-family: monospace; padding: 20px; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; }
+    input { background: #000; color: #ff0; }
+    button { background: #ff0; color: #000; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🔗 Simple URL Shortener</h2>
+  <input type="text" id="url" placeholder="URL লিখুন..."><br>
+  <button onclick="shorten()">🔗 Shorten</button>
+  <h3>ফলাফল:</h3>
+  <input type="text" id="result" readonly>
+
+  <script>
+    function shorten() {
+      let url = document.getElementById('url').value;
+      if (!url.startsWith('http')) {
+        alert('সঠিক URL দিন!');
+        return;
+      }
+      document.getElementById('result').value = "https://bspbd.link/" + btoa(url).slice(0, 6);
+    }
+  </script>
+</body>
+</html>
