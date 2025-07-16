@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🔗 BLACK SPAMMER BD | URL Shortener</title>
+  <title>🔗 BLACK SPAMMER BD | শর্ট লিংক টুল</title>
   <style>
     body {
-      background-color: #0d0d0d;
+      background-color: #000;
       color: #00ffcc;
       font-family: monospace;
       text-align: center;
-      padding: 30px;
+      padding: 40px;
     }
     input, button {
       padding: 12px;
@@ -32,7 +32,7 @@
     .output {
       margin-top: 20px;
       word-break: break-word;
-      background: #1f1f1f;
+      background: #1c1c1c;
       padding: 15px;
       border: 2px solid #00ffcc;
       border-radius: 6px;
@@ -40,16 +40,23 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .logo {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #ff0066;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🔗 BLACK SPAMMER BD URL Shortener</h1>
-  <input type="text" id="longUrl" placeholder="👉 এখানে বড় URL লিখুন (যেমন: https://example.com)" />
+  <div class="logo">☠ BLACK SPAMMER BD ☠</div>
+  <h1>🔗 ফ্রি ইউআরএল শর্টনার</h1>
+  <input type="text" id="longUrl" placeholder="👉 এখানে বড় URL লিখুন (যেমন: https://example.com)" />
   <br>
   <button onclick="shorten()">⏬ শর্ট লিংক তৈরি করুন</button>
 
-  <div class="output" id="output">⏳ এখানে শর্ট লিংক দেখা যাবে...</div>
+  <div class="output" id="output">⏳ শর্ট লিংক এখানে দেখা যাবে...</div>
 
   <script>
     async function shorten() {
@@ -58,19 +65,19 @@
       const url = input.value.trim();
 
       if (!url || !url.startsWith("http")) {
-        output.innerHTML = "⚠️ সঠিক URL দিন (https:// দিয়ে শুরু হওয়া বাধ্যতামূলক)";
+        output.innerHTML = "⚠️ সঠিক URL দিন (https:// দিয়ে শুরু হতে হবে)";
         return;
       }
 
-      output.innerHTML = "🔄 লিংক শর্ট হচ্ছে...";
+      output.innerHTML = "🔄 লিংক শর্ট হচ্ছে, দয়া করে অপেক্ষা করুন...";
 
       try {
-        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(url)}`);
+        const response = await fetch(`https://da.gd/s?url=${encodeURIComponent(url)}`);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const shortUrl = await response.text();
-        output.innerHTML = `✅ শর্ট লিংক: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+        output.innerHTML = `✅ শর্ট লিংক তৈরি হয়েছে:<br><a href="${shortUrl.trim()}" target="_blank">${shortUrl.trim()}</a>`;
       } catch (err) {
-        output.innerHTML = `❌ লিংক তৈরি করতে সমস্যা হয়েছে: ${err.message}`;
+        output.innerHTML = `❌ লিংক তৈরি করতে সমস্যা হয়েছে: ${err.message}`;
       }
     }
   </script>
