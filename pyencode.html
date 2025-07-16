@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Python Encoder</title>
+  <style>
+    body { background: #111; color: #0ff; font-family: monospace; padding: 20px; }
+    textarea { width: 100%; height: 120px; background: #000; color: #0ff; margin-bottom: 10px; }
+    button { padding: 10px; background: #0ff; color: #000; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🐍 Python Base64 Encoder</h2>
+  <textarea id="input" placeholder="Python কোড লিখুন..."></textarea><br>
+  <button onclick="encode()">🔐 Encode</button>
+  <h3>Encoded Result:</h3>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    function encode() {
+      const input = document.getElementById('input').value;
+      const encoded = btoa(unescape(encodeURIComponent(input)));
+      document.getElementById('output').value = encoded;
+    }
+  </script>
+</body>
+</html>
