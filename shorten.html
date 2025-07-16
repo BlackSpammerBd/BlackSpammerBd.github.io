@@ -1,99 +1,166 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <title>🔗 শক্তিশালী URL Shortener</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔗 BLACK SPAMMER BD | শক্তিশালী URL Shortener</title>
   <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
     body {
-      margin: 0;
-      padding: 0;
-      background: #0f0f0f;
-      font-family: 'Courier New', monospace;
-      color: #00ff99;
+      margin: 0; padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #0c0c0c;
+      color: #00ffcc;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      padding: 30px 10px;
+      padding: 30px 15px;
     }
     h1 {
-      color: #00ffcc;
+      font-size: 2.5rem;
       margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffcc;
     }
-    input, button {
-      width: 90%;
+    input[type="text"] {
+      width: 100%;
       max-width: 500px;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
+      padding: 15px;
+      font-size: 1.1rem;
       border-radius: 8px;
-      font-size: 16px;
-    }
-    input {
-      background: #1f1f1f;
+      border: 2px solid #00ffcc;
+      background: #121212;
       color: #00ffcc;
-      border: 1px solid #00ffcc;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #00ffaa;
+      box-shadow: 0 0 10px #00ffaa;
     }
     button {
+      width: 100%;
+      max-width: 500px;
+      padding: 15px;
+      margin-top: 15px;
       background: #00ffcc;
+      border: none;
+      border-radius: 8px;
       color: #000;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background 0.3s ease;
+      box-shadow: 0 0 10px #00ffcc;
     }
     button:hover {
-      background: #00ffaa;
+      background: #00d8b3;
     }
-    .result {
-      background: #1a1a1a;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      width: 90%;
+    .output {
+      margin-top: 25px;
+      width: 100%;
       max-width: 500px;
-      word-break: break-all;
+      padding: 15px;
+      background: #121212;
+      border-radius: 8px;
+      border: 2px solid #00ffcc;
+      word-break: break-word;
+      min-height: 60px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      user-select: all;
     }
     a {
-      color: #00ffff;
+      color: #00ffaa;
       text-decoration: underline;
+    }
+    .error {
+      color: #ff4d4d;
+      font-weight: 700;
+      text-align: center;
+    }
+    .loading {
+      text-align: center;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      input, button, .output {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>🔗 Real URL Shortener</h1>
-  <input type="text" id="longUrl" placeholder="🔍 এখানে বড় URL লিখুন (যেমনঃ https://example.com)">
-  <button onclick="shorten()">⏬ শর্ট লিংক তৈরি করুন</button>
+  <h1>🔗 BLACK SPAMMER BD | URL Shortener</h1>
 
-  <div id="output" class="result" style="display:none;"></div>
+  <input type="text" id="longUrl" placeholder="👉 বড় URL লিখুন (যেমন: https://example.com)" aria-label="বড় URL" />
+
+  <button id="shortenBtn">⏬ শর্ট লিংক তৈরি করুন</button>
+
+  <div id="output" class="output" aria-live="polite" role="status"></div>
 
   <script>
-    async function shorten() {
-      const longUrl = document.getElementById("longUrl").value.trim();
-      const output = document.getElementById("output");
+    const btn = document.getElementById("shortenBtn");
+    const input = document.getElementById("longUrl");
+    const output = document.getElementById("output");
 
-      if (!longUrl.startsWith("http")) {
-        output.style.display = "block";
-        output.innerHTML = "⚠️ সঠিক URL দিন (https://...) দিয়ে শুরু হতে হবে!";
+    btn.addEventListener("click", async () => {
+      let longUrl = input.value.trim();
+      output.classList.remove("error");
+      output.textContent = "";
+
+      if (!longUrl) {
+        output.classList.add("error");
+        output.textContent = "⚠️ দয়া করে URL লিখুন।";
+        return;
+      }
+      if (!/^https?:\/\//i.test(longUrl)) {
+        output.classList.add("error");
+        output.textContent = "⚠️ URL অবশ্যই https:// অথবা http:// দিয়ে শুরু হতে হবে।";
         return;
       }
 
-      output.style.display = "block";
-      output.innerHTML = "⏳ শর্ট লিংক তৈরি হচ্ছে...";
+      output.classList.remove("error");
+      output.classList.add("loading");
+      output.textContent = "⏳ শর্ট লিংক তৈরি হচ্ছে... একটু অপেক্ষা করুন।";
 
       try {
         const proxy = "https://corsproxy.io/?";
-        const api = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
-        const response = await fetch(proxy + api);
+        const apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
+        const response = await fetch(proxy + apiUrl);
+
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
         const shortUrl = await response.text();
 
-        output.innerHTML = `✅ আপনার শর্ট লিংক:<br><a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+        if (!shortUrl.startsWith("http")) throw new Error("অবৈধ শর্ট URL প্রাপ্ত হয়েছে।");
+
+        output.classList.remove("loading");
+        output.textContent = "";
+        output.innerHTML = `✅ আপনার শর্ট লিংক: <a href="${shortUrl}" target="_blank" rel="noopener noreferrer">${shortUrl}</a>`;
       } catch (err) {
-        output.innerHTML = "❌ শর্ট লিংক তৈরি করা যায়নি! আবার চেষ্টা করুন।";
+        output.classList.remove("loading");
+        output.classList.add("error");
+        output.textContent = `❌ লিংক তৈরি করতে সমস্যা হয়েছে: ${err.message}`;
       }
-    }
+    });
+
+    // Enter প্রেস করলে শর্টেন হওয়া
+    input.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        btn.click();
+      }
+    });
   </script>
 
 </body>
