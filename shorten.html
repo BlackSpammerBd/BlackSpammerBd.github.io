@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>🔗 BLACK SPAMMER BD | প্রোফেশনাল ইউআরএল শর্টনার</title>
   <style>
-    /* ফন্ট ও ব্যাকগ্রাউন্ড */
     body {
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,8 +16,6 @@
       flex-direction: column;
       justify-content: center;
     }
-
-    /* লোগো */
     .logo {
       font-size: 36px;
       font-weight: 900;
@@ -27,16 +24,12 @@
       user-select: none;
       text-shadow: 0 0 10px #ff3366;
     }
-
-    /* শিরোনাম */
     h1 {
       font-weight: 700;
       margin-bottom: 30px;
       letter-spacing: 1.2px;
       text-shadow: 0 0 6px #00ffcc;
     }
-
-    /* ইনপুট ও বাটন */
     input[type="text"] {
       width: 100%;
       max-width: 600px;
@@ -54,7 +47,6 @@
       border-color: #ff3366;
       box-shadow: 0 0 15px #ff3366 inset;
     }
-
     button {
       margin-top: 20px;
       background-color: #ff3366;
@@ -74,8 +66,6 @@
     button:hover {
       background-color: #e22d5c;
     }
-
-    /* আউটপুট বক্স */
     .output {
       margin: 30px auto 0;
       max-width: 600px;
@@ -87,46 +77,40 @@
       word-break: break-word;
       font-size: 18px;
       position: relative;
+      min-height: 50px;
     }
-
-    /* কপি বাটন */
     .copy-btn {
-      position: absolute;
-      right: 20px;
-      top: 20px;
+      margin-top: 12px;
       background: #00ffcc;
       border: none;
       color: #000;
-      padding: 8px 14px;
+      padding: 10px 20px;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
       transition: background-color 0.3s ease;
       user-select: none;
+      font-size: 16px;
     }
     .copy-btn:hover {
       background-color: #00cc99;
     }
-
-    /* লিংক স্টাইল */
     .short-link {
       color: #ff3366;
       font-weight: 700;
       text-decoration: none;
+      display: inline-block;
+      margin-top: 8px;
     }
     .short-link:hover {
       text-decoration: underline;
     }
-
-    /* Responsive */
     @media(max-width: 650px) {
       input[type="text"], button, .output {
         max-width: 90vw;
       }
       .copy-btn {
-        right: 10px;
-        top: 10px;
-        padding: 6px 10px;
+        padding: 8px 14px;
         font-size: 14px;
       }
     }
@@ -163,7 +147,9 @@
         output.innerHTML = `
           ✅ শর্ট লিংক তৈরি হয়েছে:<br>
           <a href="${shortUrl}" target="_blank" class="short-link">${shortUrl}</a>
-          <button class="copy-btn" onclick="copyLink()">কপি</button>
+          <br>
+          <button class="copy-btn" onclick="copyLink()">কপি করুন</button>
+          <span id="copy-msg" style="color:#0f0; margin-left:15px; font-weight:bold;"></span>
         `;
       } catch (error) {
         output.innerHTML = `❌ লিংক তৈরি করতে সমস্যা হয়েছে: ${error.message}`;
@@ -172,12 +158,14 @@
 
     function copyLink() {
       const shortLink = document.querySelector('.short-link');
+      const copyMsg = document.getElementById('copy-msg');
       if (!shortLink) return;
 
       const text = shortLink.href;
 
       navigator.clipboard.writeText(text).then(() => {
-        alert('✅ লিংক কপি হয়েছে!');
+        copyMsg.textContent = '✅ কপি সম্পন্ন!';
+        setTimeout(() => { copyMsg.textContent = ''; }, 2500);
       }).catch(() => {
         alert('❌ কপি করতে সমস্যা হয়েছে, দয়া করে ম্যানুয়ালি কপি করুন।');
       });
