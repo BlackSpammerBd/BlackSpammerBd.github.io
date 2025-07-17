@@ -1,33 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Base64 Tool</title>
   <style>
-    body { background: #111; color: #0f0; font-family: monospace; padding: 20px; }
-    textarea { width: 100%; height: 100px; background: #000; color: #0f0; margin-bottom: 10px; }
-    button { padding: 10px; background: #0f0; color: #000; border: none; cursor: pointer; }
+    body {
+      background-color: #0d1117;
+      color: #c9f;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2, h3 {
+      color: #0ff;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      background: #161b22;
+      color: #0f0;
+      border: 1px solid #30363d;
+      padding: 10px;
+      resize: vertical;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .btn-group, .lang-group {
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      background: #0f0;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #aaffaa;
+    }
+
+    .copy-status {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #0f0;
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h2>🧬 Base64 Encoder / Decoder</h2>
-  <textarea id="input" placeholder="এখানে লিখুন..."></textarea><br>
-  <button onclick="encode()">🔼 Encode</button>
-  <button onclick="decode()">🔽 Decode</button>
-  <h3>ফলাফল:</h3>
+  <div class="lang-group">
+    🌐 <label for="lang">Language:</label>
+    <select id="lang" onchange="changeLang()">
+      <option value="bn">বাংলা 🇧🇩</option>
+      <option value="en">English 🇺🇸</option>
+      <option value="ar">العربية 🇸🇦</option>
+    </select>
+  </div>
+
+  <h2 id="title">🧬 Base64 এনকোডার / ডিকোডার</h2>
+  <textarea id="input" placeholder="এখানে লিখুন..."></textarea>
+
+  <div class="btn-group">
+    <button onclick="encode()" id="encodeBtn">🔼 এনকোড করুন</button>
+    <button onclick="decode()" id="decodeBtn">🔽 ডিকোড করুন</button>
+    <button onclick="copyToClipboard()" id="copyBtn">📋 কপি করুন</button>
+  </div>
+
+  <h3 id="outputLabel">ফলাফল:</h3>
   <textarea id="output" readonly></textarea>
+  <div class="copy-status" id="copy-status">✅ কপি হয়েছে!</div>
 
   <script>
-    function encode() {
-      document.getElementById('output').value = btoa(document.getElementById('input').value);
-    }
-    function decode() {
-      try {
-        document.getElementById('output').value = atob(document.getElementById('input').value);
-      } catch {
-        document.getElementById('output').value = '⛔ ভুল ইনপুট!';
+    const translations = {
+      bn: {
+        title: "🧬 Base64 এনকোডার / ডিকোডার",
+        placeholder: "এখানে লিখুন...",
+        encode: "🔼 এনকোড করুন",
+        decode: "🔽 ডিকোড করুন",
+        copy: "📋 কপি করুন",
+        copied: "✅ কপি হয়েছে!",
+        output: "ফলাফল:",
+        error: "⛔ ভুল ইনপুট!"
+      },
+      en: {
+        title: "🧬 Base64 Encoder / Decoder",
+        placeholder: "Type here...",
+        encode: "🔼 Encode",
+        decode: "🔽 Decode",
+        copy: "📋 Copy",
+        copied: "✅ Copied!",
+        output: "Result:",
+        error: "⛔ Invalid Input!"
+      },
+      ar: {
+        title: "🧬 محول Base64",
+        placeholder: "اكتب هنا...",
+        encode: "🔼 ترميز",
+        decode: "🔽 فك ترميز",
+        copy: "📋 نسخ",
+        copied: "✅ تم النسخ!",
+        output: "النتيجة:",
+        error: "⛔ إدخال غير صالح!"
       }
+    };
+
+    function changeLang() {
+      const lang = document.getElementById('lang').value;
+      const t = translations[lang];
+
+      document.getElementById('title').innerText = t.title;
+      document.getElementById('input').placeholder = t.placeholder;
+      document.getElementById('encodeBtn').innerText = t.encode;
+      document.getElementById('decodeBtn').innerText = t.decode;
+      document.getElementById('copyBtn').innerText = t.copy;
+      document.getElementById('outputLabel').innerText = t.output;
     }
+
+    function encode() {
+      const input = document.getElementById('input').value;
+      document.getElementById('output').value = btoa(unescape(encodeURIComponent(input)));
+      hideCopyStatus();
+    }
+
+    function decode() {
+      const input = document.getElementById('input').value;
+      try {
+        const decoded = decodeURIComponent(escape(atob(input)));
+        document.getElementById('output').value = decoded;
+      } catch {
+        const lang = document.getElementById('lang').value;
+        document.getElementById('output').value = translations[lang].error;
+      }
+      hideCopyStatus();
+    }
+
+    function copyToClipboard() {
+      const output = document.getElementById('output');
+      output.select();
+      document.execCommand("copy");
+      showCopyStatus();
+    }
+
+    function showCopyStatus() {
+      const lang = document.getElementById('lang').value;
+      const status = document.getElementById('copy-status');
+      status.innerText = translations[lang].copied;
+      status.style.display = 'block';
+      setTimeout(() => {
+        status.style.display = 'none';
+      }, 2000);
+    }
+
+    function hideCopyStatus() {
+      document.getElementById('copy-status').style.display = 'none';
+    }
+
+    // Init
+    changeLang();
   </script>
 </body>
 </html>
