@@ -5,79 +5,154 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>🌐 cURL to Python Converter | BLACK SPAMMER BD</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #000;
-      color: #0ff;
-      font-family: monospace, monospace;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #00ffe7;
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0;
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      align-items: center;
+      flex-direction: column;
     }
+
     h2 {
+      color: #00ffe7;
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
       text-align: center;
-      margin-bottom: 20px;
-      color: #00ffcc;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #00ffe7;
     }
+
+    select {
+      max-width: 900px;
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 2px solid #00ffe7;
+      margin-bottom: 20px;
+      background: rgba(0,0,0,0.7);
+      color: #00ffe7;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 0 15px #00ffe7;
+      transition: border-color 0.3s ease;
+    }
+    select:focus {
+      outline: none;
+      border-color: #00cc99;
+      box-shadow: 0 0 25px #00cc99;
+    }
+
     textarea {
       width: 100%;
+      max-width: 900px;
       height: 180px;
-      background: #111;
-      color: #0ff;
-      border: 2px solid #0ff;
-      border-radius: 8px;
-      padding: 15px;
-      font-size: 16px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ffe7;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 1.1rem;
+      color: #00ffe7;
       resize: vertical;
+      box-shadow: 0 0 15px #00ffe7;
+      transition: border-color 0.3s ease;
+      font-family: 'JetBrains Mono', monospace;
       margin-bottom: 15px;
     }
+    textarea:focus {
+      outline: none;
+      border-color: #00cc99;
+      box-shadow: 0 0 25px #00cc99;
+    }
+
     button {
-      display: block;
       width: 100%;
-      padding: 15px;
-      background: #00ffcc;
+      max-width: 900px;
+      background: #00ffe7;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 1.2rem;
       font-weight: 700;
-      font-size: 18px;
+      color: #003333;
       cursor: pointer;
-      color: #000;
-      margin-bottom: 25px;
-      transition: background 0.3s ease;
+      box-shadow: 0 0 20px #00ffe7;
+      letter-spacing: 1px;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
     }
     button:hover {
       background: #00cc99;
+      box-shadow: 0 0 30px #00cc99;
+      color: #001a1a;
     }
+
     pre {
-      background: #111;
-      border: 2px solid #00ffcc;
-      border-radius: 8px;
-      padding: 20px;
-      font-size: 15px;
-      overflow-x: auto;
+      max-width: 900px;
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      border-radius: 12px;
+      border: 2px solid #00ffe7;
+      padding: 25px;
+      font-size: 1rem;
+      line-height: 1.5;
       white-space: pre-wrap;
-      word-wrap: break-word;
+      word-break: break-word;
+      box-shadow: 0 0 20px #00ffe7;
+      color: #00ffe7;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 15px;
+      min-height: 200px;
+      user-select: text;
     }
+
     .copy-btn {
-      background: #00ffcc;
-      color: #000;
+      max-width: 900px;
+      width: 100%;
+      padding: 14px;
+      background: #00ffe7;
       border: none;
-      padding: 10px 25px;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 12px;
       font-weight: 700;
-      margin-top: 10px;
-      transition: background 0.3s ease;
+      color: #003333;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00ffe7;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
     }
     .copy-btn:hover {
       background: #00cc99;
+      box-shadow: 0 0 25px #00cc99;
+      color: #001a1a;
     }
+
     #copy-msg {
       color: #0f0;
       font-weight: 700;
-      margin-left: 15px;
-      display: inline-block;
       font-size: 16px;
       vertical-align: middle;
+      min-height: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+      user-select: none;
     }
   </style>
 </head>
@@ -85,23 +160,133 @@
 
   <h2>🌐 cURL to Python Converter</h2>
 
+  <select id="langSelect" aria-label="ভাষা নির্বাচন করুন" onchange="updatePlaceholders()">
+    <option value="bn" selected>বাংলা</option>
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="hi">हिन्दी</option>
+    <option value="zh">中文</option>
+    <option value="ar">العربية</option>
+    <option value="ru">Русский</option>
+    <!-- চাইলে আরো ভাষা যোগ করতে পারো -->
+  </select>
+
   <textarea id="curlInput" placeholder="এখানে cURL কমান্ড পেস্ট করুন..."></textarea>
 
   <button onclick="convertCurl()">🔄 রূপান্তর করুন</button>
 
   <pre id="pythonOutput">Python requests কোড এখানে দেখাবে...</pre>
-  <button class="copy-btn" onclick="copyCode()">কপি করুন</button><span id="copy-msg"></span>
+  <button class="copy-btn" onclick="copyCode()">📋 কপি করুন</button>
+  <div id="copy-msg"></div>
 
   <script>
-    // খুবই বেসিক cURL to Python converter (Headers, method, URL, data)
+    const translations = {
+      bn: {
+        pasteCurl: "এখানে cURL কমান্ড পেস্ট করুন...",
+        convertBtn: "🔄 রূপান্তর করুন",
+        resultPlaceholder: "Python requests কোড এখানে দেখাবে...",
+        emptyCurl: "⚠️ প্রথমে cURL কমান্ড লিখুন বা পেস্ট করুন।",
+        noUrl: "❌ URL খুঁজে পাওয়া যায়নি। নিশ্চিত করুন কমান্ড সঠিক।",
+        copySuccess: "✅ কপি সম্পন্ন!",
+        copyFail: "❌ কপি করতে সমস্যা হয়েছে, ম্যানুয়ালি কপি করুন।"
+      },
+      en: {
+        pasteCurl: "Paste your cURL command here...",
+        convertBtn: "🔄 Convert",
+        resultPlaceholder: "Python requests code will appear here...",
+        emptyCurl: "⚠️ Please enter or paste a cURL command first.",
+        noUrl: "❌ URL not found. Please check your command.",
+        copySuccess: "✅ Copied successfully!",
+        copyFail: "❌ Copy failed, please copy manually."
+      },
+      es: {
+        pasteCurl: "Pega aquí tu comando cURL...",
+        convertBtn: "🔄 Convertir",
+        resultPlaceholder: "El código Python requests aparecerá aquí...",
+        emptyCurl: "⚠️ Por favor ingresa o pega un comando cURL primero.",
+        noUrl: "❌ URL no encontrada. Verifica tu comando.",
+        copySuccess: "✅ ¡Copiado con éxito!",
+        copyFail: "❌ Error al copiar, por favor copia manualmente."
+      },
+      fr: {
+        pasteCurl: "Collez votre commande cURL ici...",
+        convertBtn: "🔄 Convertir",
+        resultPlaceholder: "Le code Python requests apparaîtra ici...",
+        emptyCurl: "⚠️ Veuillez d'abord entrer ou coller une commande cURL.",
+        noUrl: "❌ URL introuvable. Veuillez vérifier votre commande.",
+        copySuccess: "✅ Copié avec succès !",
+        copyFail: "❌ Échec de la copie, veuillez copier manuellement."
+      },
+      de: {
+        pasteCurl: "Füge hier deinen cURL-Befehl ein...",
+        convertBtn: "🔄 Konvertieren",
+        resultPlaceholder: "Python requests Code wird hier angezeigt...",
+        emptyCurl: "⚠️ Bitte zuerst einen cURL-Befehl eingeben oder einfügen.",
+        noUrl: "❌ URL nicht gefunden. Bitte überprüfe deinen Befehl.",
+        copySuccess: "✅ Erfolgreich kopiert!",
+        copyFail: "❌ Kopieren fehlgeschlagen, bitte manuell kopieren."
+      },
+      hi: {
+        pasteCurl: "यहाँ अपना cURL कमांड पेस्ट करें...",
+        convertBtn: "🔄 कनवर्ट करें",
+        resultPlaceholder: "Python requests कोड यहाँ दिखेगा...",
+        emptyCurl: "⚠️ कृपया पहले cURL कमांड दर्ज करें या पेस्ट करें।",
+        noUrl: "❌ URL नहीं मिला। कृपया कमांड जांचें।",
+        copySuccess: "✅ सफलतापूर्वक कॉपी किया गया!",
+        copyFail: "❌ कॉपी करने में त्रुटि, कृपया मैन्युअल रूप से कॉपी करें।"
+      },
+      zh: {
+        pasteCurl: "在此粘贴你的 cURL 命令...",
+        convertBtn: "🔄 转换",
+        resultPlaceholder: "Python requests 代码将显示在此处...",
+        emptyCurl: "⚠️ 请先输入或粘贴 cURL 命令。",
+        noUrl: "❌ 未找到 URL。请检查命令。",
+        copySuccess: "✅ 复制成功！",
+        copyFail: "❌ 复制失败，请手动复制。"
+      },
+      ar: {
+        pasteCurl: "الصق أمر cURL هنا...",
+        convertBtn: "🔄 تحويل",
+        resultPlaceholder: "سيظهر كود Python requests هنا...",
+        emptyCurl: "⚠️ الرجاء إدخال أو لصق أمر cURL أولاً.",
+        noUrl: "❌ لم يتم العثور على URL. يرجى التحقق من الأمر.",
+        copySuccess: "✅ تم النسخ بنجاح!",
+        copyFail: "❌ فشل النسخ، يرجى النسخ يدوياً."
+      },
+      ru: {
+        pasteCurl: "Вставьте команду cURL здесь...",
+        convertBtn: "🔄 Конвертировать",
+        resultPlaceholder: "Код Python requests появится здесь...",
+        emptyCurl: "⚠️ Пожалуйста, сначала введите или вставьте команду cURL.",
+        noUrl: "❌ URL не найден. Пожалуйста, проверьте команду.",
+        copySuccess: "✅ Успешно скопировано!",
+        copyFail: "❌ Не удалось скопировать, скопируйте вручную."
+      }
+    };
+
+    function updatePlaceholders() {
+      const lang = document.getElementById('langSelect').value;
+      const t = translations[lang];
+
+      document.getElementById('curlInput').placeholder = t.pasteCurl;
+      document.querySelector('button[onclick="convertCurl()"]').textContent = t.convertBtn;
+      document.getElementById('pythonOutput').textContent = t.resultPlaceholder;
+      document.getElementById('copy-msg').textContent = '';
+    }
+
     function convertCurl() {
+      const lang = document.getElementById('langSelect').value;
+      const t = translations[lang];
+
       const curlText = document.getElementById('curlInput').value.trim();
       const output = document.getElementById('pythonOutput');
       const copyMsg = document.getElementById('copy-msg');
       copyMsg.textContent = '';
 
       if (!curlText) {
-        output.textContent = '⚠️ প্রথমে cURL কমান্ড লিখুন বা পেস্ট করুন।';
+        output.textContent = t.emptyCurl;
         return;
       }
 
@@ -112,7 +297,7 @@
         let url = urlMatch ? urlMatch[1] : null;
 
         if (!url) {
-          output.textContent = '❌ URL খুঁজে পাওয়া যায়নি। নিশ্চিত করুন কমান্ড সঠিক।';
+          output.textContent = t.noUrl;
           return;
         }
 
@@ -168,13 +353,17 @@
       const output = document.getElementById('pythonOutput');
       const copyMsg = document.getElementById('copy-msg');
       navigator.clipboard.writeText(output.textContent).then(() => {
-        copyMsg.textContent = '✅ কপি সম্পন্ন!';
+        const lang = document.getElementById('langSelect').value;
+        const t = translations[lang];
+        copyMsg.textContent = t.copySuccess;
         setTimeout(() => copyMsg.textContent = '', 3000);
       }).catch(() => {
         alert('❌ কপি করতে সমস্যা হয়েছে, ম্যানুয়ালি কপি করুন।');
       });
     }
-  </script>
 
+    // পেজ লোডে ডিফল্ট ভাষা আপডেট
+    window.onload = updatePlaceholders;
+  </script>
 </body>
 </html>
