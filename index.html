@@ -5,132 +5,192 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACK SPAMMER BD | Cyber Toolkit</title>
   <style>
-    body {
-      background-color: #0d0d0d;
-      color: #f1f1f1;
-      font-family: 'Segoe UI', sans-serif;
+    /* Reset & Basic */
+    * {
+      box-sizing: border-box;
       margin: 0; padding: 0;
     }
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ff4c4c;
+    }
+
+    /* Navbar */
     nav {
-      background: #111;
-      padding: 20px;
+      background-color: #111;
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid #ff0000;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 3px solid #ff0000;
     }
     nav .logo {
       color: #ff0000;
-      font-size: 20px;
-      font-weight: bold;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
     }
     nav ul {
-      list-style: none;
       display: flex;
-      gap: 15px;
-      margin: 0;
-      padding: 0;
+      gap: 2rem;
+      list-style: none;
     }
     nav ul li a {
       color: #ddd;
-      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Language selector */
+    #language-select {
+      background: #222;
+      color: #eee;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
       font-weight: 600;
     }
-    nav ul li a:hover {
-      color: #ff0000;
-    }
-    .hero {
-      padding: 100px 20px;
-      text-align: center;
-      background: linear-gradient(to right, #111, #1a1a1a);
-    }
-    .hero h1 {
-      color: #ff3333;
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      color: #bbb;
-      font-size: 18px;
-      margin-top: 0;
-    }
-    .hero .btn {
+    #language-select:hover {
       background: #ff0000;
       color: #fff;
-      padding: 12px 25px;
-      text-decoration: none;
-      margin-top: 25px;
-      display: inline-block;
-      border-radius: 5px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 20px 80px;
+      text-align: center;
+      background: linear-gradient(90deg, #111 0%, #1a1a1a 100%);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ff4444;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1.5px;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #bbb;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background-color: #ff0000;
+      color: #fff;
+      padding: 14px 32px;
       font-weight: 700;
-      transition: background 0.3s ease;
+      border-radius: 8px;
+      display: inline-block;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+      transition: background-color 0.3s ease;
     }
-    .hero .btn:hover {
-      background: #cc0000;
+    .btn:hover {
+      background-color: #cc0000;
     }
+
+    /* Tools Section */
     .tools {
-      padding: 50px 20px;
-      background: #1a1a1a;
-      max-width: 1000px;
+      background-color: #1a1a1a;
+      padding: 60px 20px;
+      max-width: 1100px;
       margin: 0 auto 60px;
-      border-radius: 12px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
     }
     .tools h2 {
       text-align: center;
-      color: #00ffcc;
-      margin-bottom: 40px;
-      font-weight: 700;
-      font-size: 28px;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #00ffd0;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
     }
     .tool-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 35px;
     }
     .tool {
-      background: #222;
-      padding: 25px;
-      border-radius: 10px;
-      width: 280px;
-      text-align: center;
+      background-color: #222;
+      padding: 30px 25px;
+      border-radius: 15px;
       box-shadow: 0 0 15px #000;
-      transition: transform 0.3s ease;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .tool:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px #ff0000;
+      transform: translateY(-12px);
+      box-shadow: 0 0 35px #ff0000;
     }
     .tool h3 {
       color: #00ccff;
+      font-size: 1.8rem;
       margin-bottom: 15px;
-      font-weight: 700;
-      font-size: 22px;
+      font-weight: 800;
     }
     .tool p {
+      font-size: 1rem;
       color: #ccc;
-      font-size: 16px;
-      min-height: 60px;
+      min-height: 70px;
+      margin-bottom: 20px;
+      line-height: 1.4;
     }
     .tool a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #00ffcc;
+      background-color: #00ffcc;
       color: #000;
-      text-decoration: none;
-      border-radius: 8px;
       font-weight: 700;
-      transition: background 0.3s ease;
+      padding: 12px 24px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 3px 10px rgba(0,255,204,0.4);
     }
     .tool a:hover {
-      background: #00cc99;
+      background-color: #00cc99;
+      box-shadow: 0 5px 15px rgba(0,204,153,0.7);
     }
+
+    /* Footer */
     footer {
       text-align: center;
-      background: #111;
-      padding: 20px;
+      background-color: #111;
       color: #666;
-      font-size: 14px;
+      padding: 25px 15px;
+      font-size: 0.9rem;
+      border-top: 2px solid #ff0000;
+      margin-top: auto;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media(max-width: 480px) {
+      nav ul {
+        gap: 10px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .tools h2 {
+        font-size: 1.8rem;
+      }
+      .tool h3 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -143,10 +203,22 @@
       <li><a href="#tools">টুলস</a></li>
       <li><a href="#">আমাদের টিম</a></li>
       <li><a href="#">যোগাযোগ</a></li>
+      <li>
+        <select id="language-select" aria-label="Select Language" onchange="changeLanguage(this.value)">
+          <option value="bn" selected>বাংলা</option>
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="zh">中文</option>
+          <option value="hi">हिन्दी</option>
+          <!-- Add more languages as needed -->
+        </select>
+      </li>
     </ul>
   </nav>
 
-  <header class="hero">
+  <header class="hero" id="hero-section">
     <h1>Welcome to BLACK SPAMMER BD</h1>
     <p>বাংলাদেশের প্রথম Ethical Cyber Toolkit প্ল্যাটফর্ম</p>
     <a href="#tools" class="btn">🔧 টুলস দেখুন</a>
@@ -155,42 +227,139 @@
   <section id="tools" class="tools">
     <h2>🔧 ফ্রি টুলস</h2>
     <div class="tool-list">
+
       <div class="tool">
         <h3>🧬 Base64 ডিকোডার</h3>
         <p>এনকোড করা টেক্সট সহজে ডিকোড করুন।</p>
         <a href="base64.html">চালু করুন</a>
       </div>
+
       <div class="tool">
         <h3>🐍 Python Encoder</h3>
         <p>পাইথন স্ক্রিপ্ট নিরাপদে ইনকোড করুন।</p>
         <a href="pyencode.html">চালু করুন</a>
       </div>
+
       <div class="tool">
         <h3>🔗 URL Shortener</h3>
-        <p>দীর্ঘ URL সংক্ষিপ্ত করুন সহজেই।</p>
+        <p>দীর্ঘ URL সহজেই সংক্ষিপ্ত করুন।</p>
         <a href="shorten.html">চালু করুন</a>
       </div>
+
       <div class="tool">
         <h3>🧩 JSON Beautifier</h3>
-        <p>জটিল JSON সুন্দর করে দেখুন এবং ফরম্যাট করুন।</p>
+        <p>জটিল JSON সুন্দর করে ফরম্যাট করুন।</p>
         <a href="jsonbeautifier.html">চালু করুন</a>
       </div>
+
       <div class="tool">
         <h3>🔒 Hash Generator</h3>
         <p>MD5, SHA1, SHA256 হ্যাশ তৈরি করুন।</p>
         <a href="hashgenerator.html">চালু করুন</a>
       </div>
+
       <div class="tool">
         <h3>🌐 cURL to Python</h3>
-        <p>cURL কমান্ডকে পাইটন রিকোয়েস্টে রূপান্তর করুন।</p>
+        <p>cURL কমান্ডকে Python রিকোয়েস্টে রূপান্তর করুন।</p>
         <a href="curltopython.html">চালু করুন</a>
       </div>
+
+      <!-- New powerful tools added -->
+      <div class="tool">
+        <h3>🛡️ IP Tracker</h3>
+        <p>বিশ্বের যেকোন IP ঠিকানার অবস্থান খুঁজুন সহজেই।</p>
+        <a href="iptracker.html">চালু করুন</a>
+      </div>
+
+      <div class="tool">
+        <h3>🔐 Password Strength Checker</h3>
+        <p>আপনার পাসওয়ার্ড কতটা শক্তিশালী তা যাচাই করুন।</p>
+        <a href="passwordchecker.html">চালু করুন</a>
+      </div>
+
+      <div class="tool">
+        <h3>⚡ Port Scanner</h3>
+        <p>নেটওয়ার্কের ওপেন পোর্ট স্ক্যান করুন দ্রুত।</p>
+        <a href="portscanner.html">চালু করুন</a>
+      </div>
+
+      <div class="tool">
+        <h3>🧰 HTTP Header Analyzer</h3>
+        <p>যেকোন ওয়েবসাইটের HTTP হেডার বিশ্লেষণ করুন।</p>
+        <a href="headeranalyzer.html">চালু করুন</a>
+      </div>
+
     </div>
   </section>
 
   <footer>
-    <p>© 2025 BLACK SPAMMER BD. All rights reserved.</p>
+    © 2025 BLACK SPAMMER BD. All rights reserved.
   </footer>
+
+  <script>
+    // Simple language switcher example (demo only)
+    const translations = {
+      en: {
+        heroTitle: "Welcome to BLACK SPAMMER BD",
+        heroDesc: "Bangladesh's first Ethical Cyber Toolkit platform",
+        btnText: "🔧 View Tools",
+        toolsTitle: "🔧 Free Tools",
+        tools: [
+          ["🧬 Base64 Decoder", "Easily decode encoded text.", "Run Now"],
+          ["🐍 Python Encoder", "Securely encode Python scripts.", "Run Now"],
+          ["🔗 URL Shortener", "Shorten long URLs easily.", "Run Now"],
+          ["🧩 JSON Beautifier", "Format complex JSON beautifully.", "Run Now"],
+          ["🔒 Hash Generator", "Generate MD5, SHA1, SHA256 hashes.", "Run Now"],
+          ["🌐 cURL to Python", "Convert cURL commands to Python requests.", "Run Now"],
+          ["🛡️ IP Tracker", "Locate any IP address worldwide easily.", "Run Now"],
+          ["🔐 Password Strength Checker", "Check how strong your password is.", "Run Now"],
+          ["⚡ Port Scanner", "Scan open ports on networks fast.", "Run Now"],
+          ["🧰 HTTP Header Analyzer", "Analyze HTTP headers of any website.", "Run Now"]
+        ]
+      },
+      bn: {
+        heroTitle: "Welcome to BLACK SPAMMER BD",
+        heroDesc: "বাংলাদেশের প্রথম Ethical Cyber Toolkit প্ল্যাটফর্ম",
+        btnText: "🔧 টুলস দেখুন",
+        toolsTitle: "🔧 ফ্রি টুলস",
+        tools: [
+          ["🧬 Base64 ডিকোডার", "এনকোড করা টেক্সট সহজে ডিকোড করুন।", "চালু করুন"],
+          ["🐍 Python Encoder", "পাইথন স্ক্রিপ্ট নিরাপদে ইনকোড করুন।", "চালু করুন"],
+          ["🔗 URL Shortener", "দীর্ঘ URL সহজেই সংক্ষিপ্ত করুন।", "চালু করুন"],
+          ["🧩 JSON Beautifier", "জটিল JSON সুন্দর করে ফরম্যাট করুন।", "চালু করুন"],
+          ["🔒 Hash Generator", "MD5, SHA1, SHA256 হ্যাশ তৈরি করুন।", "চালু করুন"],
+          ["🌐 cURL to Python", "cURL কমান্ডকে Python রিকোয়েস্টে রূপান্তর করুন।", "চালু করুন"],
+          ["🛡️ IP Tracker", "বিশ্বের যেকোন IP ঠিকানার অবস্থান খুঁজুন সহজেই।", "চালু করুন"],
+          ["🔐 Password Strength Checker", "আপনার পাসওয়ার্ড কতটা শক্তিশালী তা যাচাই করুন।", "চালু করুন"],
+          ["⚡ Port Scanner", "নেটওয়ার্কের ওপেন পোর্ট স্ক্যান করুন দ্রুত।", "চালু করুন"],
+          ["🧰 HTTP Header Analyzer", "যেকোন ওয়েবসাইটের HTTP হেডার বিশ্লেষণ করুন।", "চালু করুন"]
+        ]
+      }
+    };
+
+    function changeLanguage(lang) {
+      const heroTitle = document.querySelector(".hero h1");
+      const heroDesc = document.querySelector(".hero p");
+      const btn = document.querySelector(".hero .btn");
+      const toolsTitle = document.querySelector(".tools h2");
+      const toolsContainers = document.querySelectorAll(".tool-list .tool");
+
+      if(!translations[lang]) return;
+
+      heroTitle.textContent = translations[lang].heroTitle;
+      heroDesc.textContent = translations[lang].heroDesc;
+      btn.textContent = translations[lang].btnText;
+      toolsTitle.textContent = translations[lang].toolsTitle;
+
+      translations[lang].tools.forEach((tool, i) => {
+        if (toolsContainers[i]) {
+          toolsContainers[i].querySelector('h3').textContent = tool[0];
+          toolsContainers[i].querySelector('p').textContent = tool[1];
+          toolsContainers[i].querySelector('a').textContent = tool[2];
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
